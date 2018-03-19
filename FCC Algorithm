@@ -8,3 +8,91 @@ booWho(false);
 booWho([1, 2, 3]);
 booWho({ "a": 1 });
 booWho(NaN);
+
+
+
+function fearNotLetter(str) {
+    for (var i = 0; i < str.length; i++) {
+        if (str.charCodeAt(i) != (str.charCodeAt(i + 1) - 1) && !isNaN(str.charCodeAt(i + 1))) {
+          return String.fromCharCode(str.charCodeAt(i) + 1);
+        }
+    }
+    return undefined;
+}
+
+fearNotLetter("abce");
+fearNotLetter("abcdefghjklmno");
+fearNotLetter("bcd");
+fearNotLetter("yz");
+
+
+function translatePigLatin(str) {
+    var append = '';
+    var index = -1;
+    for (var i = 0; i < str.length; i++) {
+        if (str.charAt(i) == 'a' || str.charAt(i) == 'e' || str.charAt(i) == 'i' || str.charAt(i) == 'o' || str.charAt(i) == 'u') {
+            index = i;
+            break;
+        }
+    }
+    if (index === 0) {
+        append = "way";
+    } else {
+        append = str.slice(0, index) + "ay";
+    }
+    var second = str.slice(index, str.length);
+    str = second + append;
+    return str;
+}
+
+translatePigLatin("consonant");
+
+function myReplace(str, before, after) {
+    if (before.charAt(0) == before.charAt(0).toUpperCase()) {
+        after = after.charAt(0).toUpperCase() + after.slice(1, after.length);
+    }
+    str = str.replace(before, after);
+    return str;
+}
+
+function uniteUnique(arr) {
+    var args = Array.prototype.slice.call(arguments, 0);
+    var result = args.reduce(function(a, b) {
+        return a.concat(b);
+    }, []);
+    var final = [];
+    result.filter(function(a, b) {
+        if (final.indexOf(a) == -1) {
+            final.push(a);
+        }
+    });
+    return final;
+}
+
+uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
+uniteUnique([1, 3, 2], [1, [5]], [2, [4]]);
+uniteUnique([1, 2, 3], [5, 2, 1]);
+uniteUnique([1, 2, 3], [5, 2, 1, 4], [2, 1], [6, 7, 8]);
+
+
+function sumPrimes(num) {
+    var sum = 0;
+    for (var i = 2; i <= num; i++) {
+        if (prime(i)) {
+            sum += i;
+        }
+    }
+    return sum;
+}
+
+function prime(num) {
+    for (var i = 2; i < num; i++) {
+        if (num % i === 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+sumPrimes(10);
+sumPrimes(977);
